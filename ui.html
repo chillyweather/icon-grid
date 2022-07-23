@@ -1,17 +1,105 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css"
+/>
+
+<style>
+  body {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button {
+    margin-top: 20px;
+  }
+
+  .input {
+    font-size: 28px;
+    margin-left: 12px;
+  }
+
+  .label {
+    font-size: 12px;
+    color: slategray;
+    padding-left: 0;
+  }
+</style>
+
+<h2 class="header">Icon Grid</h2>
+<!-- <p>Count: <input id="count" value="5"></p> -->
+<div class="label">
+  Rows
+  <div class="input">
+    <input
+      type="input"
+      class="input__field"
+      value="10"
+      id="rows"
+      pattern="[0-9]+"
+    />
+  </div>
+</div>
+<div class="label">
+  Icon ↔️
+  <div class="input">
+    <input
+      type="input"
+      class="input__field"
+      value="10"
+      id="icon-dist"
+      pattern="[0-9]+"
+    />
+  </div>
+</div>
+<div class="label">
+  Row ↕️
+  <div class="input">
+    <input
+      type="input"
+      class="input__field"
+      value="18"
+      id="row-dist"
+      pattern="[0-9]+"
+    />
+  </div>
+</div>
+<div class="label">
+  Column ↔️
+  <div class="input">
+    <input
+      type="input"
+      class="input__field"
+      value="36"
+      id="column-dist"
+      pattern="[0-9]+"
+    />
+  </div>
+</div>
+<button class="button button--primary" id="build">Build</button>
+
 <script>
-
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
-
+  document.getElementById("build").onclick = () => {
+    const inputRows = document.getElementById("rows");
+    const inputIconDistance = document.getElementById("icon-dist");
+    const inputRowDistance = document.getElementById("row-dist");
+    const inputColumnDistance = document.getElementById("column-dist");
+    const rows = parseInt(inputRows.value, 10);
+    const iconDist = parseInt(inputIconDistance.value, 10);
+    const rowDist = parseInt(inputRowDistance.value, 10);
+    const columnDist = parseInt(inputColumnDistance.value, 10);
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "build-icon-grid",
+          rows,
+          iconDist,
+          rowDist,
+          columnDist,
+        },
+      },
+      "*"
+    );
+  };
 </script>
