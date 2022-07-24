@@ -1,7 +1,4 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css" />
 
 <style>
   body {
@@ -12,75 +9,58 @@
   }
 
   .button {
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
-  .input {
-    font-size: 28px;
-    margin-left: 12px;
+  .input__field {
+    font-size: 14px;
   }
 
   .label {
+    display: flex;
+    margin-top: 6px;
     font-size: 12px;
     color: slategray;
     padding-left: 0;
+  }
+
+  .label-text{
+    width: 180px;
   }
 </style>
 
 <h2 class="header">Icon Grid</h2>
 <!-- <p>Count: <input id="count" value="5"></p> -->
-<div class="label">
-  Rows
-  <div class="input">
-    <input
-      type="input"
-      class="input__field"
-      value="10"
-      id="rows"
-      pattern="[0-9]+"
-    />
+<form id="input-form">
+  <div class="label">
+    <div class="label-text">Rows</div>
+    <div class="input">
+      <input type="input" class="input__field" value="10" id="rows" pattern="[0-9]+" />
+    </div>
   </div>
-</div>
-<div class="label">
-  Icon ↔️
-  <div class="input">
-    <input
-      type="input"
-      class="input__field"
-      value="10"
-      id="icon-dist"
-      pattern="[0-9]+"
-    />
+  <div class="label">
+    <div class="label-text">Icon spacing ↔️</div>
+    <div class="input">
+      <input type="input" class="input__field" value="10" id="icon-dist" pattern="[0-9]+" />
+    </div>
   </div>
-</div>
-<div class="label">
-  Row ↕️
-  <div class="input">
-    <input
-      type="input"
-      class="input__field"
-      value="18"
-      id="row-dist"
-      pattern="[0-9]+"
-    />
+  <div class="label">
+    <div class="label-text">Row spacing ↕️</div>
+    <div class="input">
+      <input type="input" class="input__field" value="18" id="row-dist" pattern="[0-9]+" />
+    </div>
   </div>
-</div>
-<div class="label">
-  Column ↔️
-  <div class="input">
-    <input
-      type="input"
-      class="input__field"
-      value="36"
-      id="column-dist"
-      pattern="[0-9]+"
-    />
+  <div class="label">
+    <div class="label-text">Column spacing ↔️</div>
+    <div class="input">
+      <input type="input" class="input__field" value="36" id="column-dist" pattern="[0-9]+" />
+    </div>
   </div>
-</div>
-<button class="button button--primary" id="build">Build</button>
+  <button type="submit" class="button button--primary" id="build">Build</button>
+</form>
 
 <script>
-  document.getElementById("build").onclick = () => {
+  document.getElementById("input-form").onsubmit = () => {
     const inputRows = document.getElementById("rows");
     const inputIconDistance = document.getElementById("icon-dist");
     const inputRowDistance = document.getElementById("row-dist");
