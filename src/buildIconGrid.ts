@@ -1,16 +1,20 @@
 // @ts-nocheck
-import attachLabelToIcon from "./attachLabelToIcon.ts";
+import {attachLabelToIcon, findTitleComponent} from "./attachLabelToIcon.ts";
 import splitArray from "./splitArray.ts";
+
+const toolsExistance = findTitleComponent()
+console.log(toolsExistance);
 
 function buildIconColumn(rows, iconDist, rowDist, columnDist) {
   const select = figma.currentPage.selection;
   const selectionParent = select[0].parent;
   const limit = rows;
-
+  
   const xP = select[0].x;
   const yP = select[0].y;
-
+  
   if (select.length === 1) {
+    // console.log(iconDist);
     const iconPlusLabel = attachLabelToIcon(select[0], iconDist);
     iconPlusLabel.x = xP;
     iconPlusLabel.y = yP;
@@ -18,8 +22,6 @@ function buildIconColumn(rows, iconDist, rowDist, columnDist) {
   }
 
   if (select.length > 1) {
-    const yPos = yP;
-    const xPos = xP;
     const rows = [];
     select.forEach((item) => {
       rows.push(item);
@@ -76,28 +78,6 @@ function buildIconColumn(rows, iconDist, rowDist, columnDist) {
       iconFrame.y = yP;
     }
 
-    //     const iconColumn = figma.createFrame();
-    //     iconColumn.layoutPositioning = "AUTO";
-    //     iconColumn.layoutMode = "VERTICAL";
-    //     iconColumn.counterAxisAlignItems = "MIN";
-    //     iconColumn.counterAxisSizingMode = "AUTO";
-    //     iconColumn.primaryAxisAlignItems = "SPACE_BETWEEN";
-    //     iconColumn.itemSpacing = 10;
-    //     iconColumn.name = "icons with labels";
-    //
-    //     result.forEach((item) => {
-    //       const row = attachLabelToIcon(item);
-    //       row.name = "icon+label";
-    //       iconColumn.appendChild(row);
-    //       row.x = 0;
-    //       row.y = yPos;
-    //       yPos += 40;
-    //     });
-    //
-    //     iconColumn.x = xP;
-    //     iconColumn.y = yP;
-    //
-    //     selectionParent.appendChild(iconColumn);
   }
 }
 

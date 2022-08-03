@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 figma.showUI(__html__);
-figma.ui.resize(320, 380);
+figma.ui.resize(260, 380);
 import buildIconColumn from "./src/buildIconGrid.ts";
 
 figma.ui.onmessage = ({ rows, iconDist, rowDist, columnDist }) => {

@@ -1,17 +1,23 @@
 // @ts-nocheck
 
 //& find right set and right component inside it
-function findTitleComponent() {
+export function findTitleComponent() {
   const iconLabel = figma.root.findOne((node) => {
     const result = node.name === ".DS-title" && node.type === "COMPONENT_SET";
     return result;
   });
-  return iconLabel.children.filter(
-    (node) => node.name === "size=xs,font=regular,color=dark"
-  )[0];
+  if (iconLabel) {
+    return iconLabel.children.filter(
+      (node) => node.name === "size=xs,font=regular,color=dark"
+    )[0];
+  }else{
+    figma.notify('to use this plugin, please, add "🧨 .DO NOT TOUCH!!! - internal tools" page to this project')
+    figma.closePlugin()
+    return
+  }
 }
 
-function attachLabelToIcon(icon: any, spacing) {
+export function attachLabelToIcon(icon: any, spacing) {
   const labelXS = findTitleComponent();
   const label = labelXS.createInstance();
   label.y = icon.y;
@@ -27,5 +33,3 @@ function attachLabelToIcon(icon: any, spacing) {
   iconPlusLabel.fills = [];
   return iconPlusLabel;
 }
-
-export default attachLabelToIcon;
